@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useReducer, useState } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import "./App.css";
 import AddTodo from "./components/AddTodo";
 import Counter from "./components/Counter";
@@ -51,7 +51,7 @@ function App() {
     }
   };
 
-  const count = useCallback(() => {
+  const count:()=>number = useCallback(() => {
     return counter.counter;
   }, [counter]);
 
