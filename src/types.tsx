@@ -22,3 +22,25 @@ export interface MarksProps{
     student:student
 }
 
+export interface product{
+    name:string
+    description:string
+    price:string
+    tags:string[]
+    stock :number
+}
+
+export interface order{
+    customerName:string
+    customerAddress:string
+    zipcode:number
+    products:product[]
+    quantity:number
+}
+
+export interface settings{
+    titleIncludesTags:boolean
+    defaultPrice:number
+    defaultStock:number
+    defaultZipcode:number
+}
