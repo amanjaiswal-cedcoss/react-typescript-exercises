@@ -39,10 +39,9 @@ function AddProduct(props: IProps) {
           tags: tags,
           stock: finalObj.stock,
         };
-        console.log(obj)
         temp.push(obj);
         props.setProducts([...temp]);
-        // e.currentTarget.reset();
+        e.currentTarget.reset();
       }
     }
   };
@@ -79,7 +78,7 @@ function AddProduct(props: IProps) {
         <label className="form-label">Price</label>
         <input
           ref={refPrice}
-          type="number"
+          type="text"
           className="form-control"
           id="price"
         />

@@ -21,11 +21,11 @@ function ListOrders(props:IProps) {
         </thead>
         <tbody>
           {props.orders.map(ele=>{
-            return  <tr>
+            return  <tr key={JSON.stringify(ele)}>
             <th scope="row">{ele.customerName}</th>
             <td className="shorttxt">{ele.customerAddress}</td>
             <td>{ele.zipcode}</td>
-            <td className="shorttxt">{ele.products.map(ele=>ele.name+',')}</td>
+            <td className="shorttxt">{ele.products.map(ele=><span key={ele.name}>{ele.name+','}</span>)}</td>
             <td>{ele.quantity}</td>
           </tr>
           })}

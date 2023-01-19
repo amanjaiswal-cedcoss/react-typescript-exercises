@@ -5,13 +5,10 @@ function useConditions(settings:settings,obj:hookObj) {
   const [finalObj,setFinalObj]=useState<hookObj>(obj)
 
   useEffect(()=>{
-    console.log('obj.price',obj.price,settings.defaultPrice)
     if(obj!==null){
       if(settings.titleIncludesTags===true){
-        console.log('name true');
         finalObj.name=`${obj.name} ${obj.tags.join(',')}`
       }else{
-        console.log('name false');
         finalObj.name=obj.name;
       }
       if(obj.price===''){

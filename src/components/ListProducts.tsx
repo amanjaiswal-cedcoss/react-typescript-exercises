@@ -20,7 +20,7 @@ function ListProducts(props:IProps) {
         </thead>
         <tbody>
           {props.products.map(ele=>{
-            return <tr>
+            return <tr key={ele.name}>
             <th scope="row">{ele.name}</th>
             <td className="shorttxt">{ele.description}</td>
             <td>{ele.price}</td>

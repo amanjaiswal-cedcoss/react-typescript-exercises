@@ -15,18 +15,6 @@ const initialProducts=[
     tags:['Apple','smartphone'],
     stock:150,
    },
-   { name:'Iphone',
-    description:'Apple smartphone with flagship features',
-    price:'₹99,990',
-    tags:['Apple','smartphone'],
-    stock:150,
-   },
-   { name:'Iphone',
-    description:'Apple smartphone with flagship features',
-    price:'₹99,990',
-    tags:['Apple','smartphone'],
-    stock:150,
-   },
 ]
 
 const initialOrders=[
