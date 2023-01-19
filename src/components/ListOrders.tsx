@@ -1,6 +1,11 @@
 import React from 'react'
+import { order } from '../types'
 
-function ListOrders() {
+interface IProps{
+  orders:order[]
+}
+
+function ListOrders(props:IProps) {
   return (
     <div className="border border-dark m-2 card p-4 d-inline-flex card shadow-sm border-0">
       <h4>Orders</h4>
@@ -15,13 +20,15 @@ function ListOrders() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Iphone</th>
-            <td className="shorttxt">Apple's smartphone with flagship features</td>
-            <td>₹99,990</td>
-            <td className="shorttxt">Apple,smartphone</td>
-            <td>56</td>
+          {props.orders.map(ele=>{
+            return  <tr>
+            <th scope="row">{ele.customerName}</th>
+            <td className="shorttxt">{ele.customerAddress}</td>
+            <td>{ele.zipcode}</td>
+            <td className="shorttxt">{ele.products.map(ele=>ele.name+',')}</td>
+            <td>{ele.quantity}</td>
           </tr>
+          })}
         </tbody>
       </table>
     </div>

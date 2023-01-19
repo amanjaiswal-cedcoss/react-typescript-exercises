@@ -1,6 +1,10 @@
 import React from 'react'
+import { settings } from '../types'
+interface IProps{
+  settings:settings
+}
 
-function ListSettings() {
+function ListSettings(props:IProps) {
   return (
     <div className="border border-dark m-2 card p-4 d-inline-flex card shadow-sm border-0">
       <h4>Settings</h4>
@@ -15,10 +19,10 @@ function ListSettings() {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">No</th>
-            <td className="shorttxt">00</td>
-            <td>00</td>
-            <td className="shorttxt">111111</td>
+            <th scope="row">{props.settings.titleIncludesTags?'Yes':'No'}</th>
+            <td className="shorttxt">{props.settings.defaultPrice}</td>
+            <td>{props.settings.defaultStock}</td>
+            <td className="shorttxt">{props.settings.defaultZipcode}</td>
           </tr>
         </tbody>
       </table>

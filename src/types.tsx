@@ -40,7 +40,15 @@ export interface order{
 
 export interface settings{
     titleIncludesTags:boolean
-    defaultPrice:number
+    defaultPrice:string
     defaultStock:number
     defaultZipcode:number
+}
+
+export interface hookObj{
+    name:string
+    tags:string[]
+    price:string
+    stock :number
+    zipcode:number
 }

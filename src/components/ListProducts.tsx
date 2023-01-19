@@ -1,6 +1,10 @@
 import React from "react";
+import { product } from "../types";
+interface IProps{
+  products:product[]
+}
 
-function ListProducts() {
+function ListProducts(props:IProps) {
   return (
     <div className="border border-dark m-2 card p-4 d-inline-flex card shadow-sm border-0">
       <h4>Products</h4>
@@ -15,13 +19,15 @@ function ListProducts() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Iphone</th>
-            <td className="shorttxt">Apple's smartphone with flagship features</td>
-            <td>₹99,990</td>
-            <td className="shorttxt">Apple,smartphone</td>
-            <td>56</td>
+          {props.products.map(ele=>{
+            return <tr>
+            <th scope="row">{ele.name}</th>
+            <td className="shorttxt">{ele.description}</td>
+            <td>{ele.price}</td>
+            <td className="shorttxt">{ele.tags.map(item=>{return item+','})}</td>
+            <td>{ele.stock}</td>
           </tr>
+          })}
         </tbody>
       </table>
     </div>
