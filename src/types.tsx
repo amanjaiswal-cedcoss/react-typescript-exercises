@@ -1,24 +1,6 @@
-export interface StudentProps{
-    name : string
-    age : number
-    qualified : boolean
-    gender : 'male' | 'female'
-}
-
-export interface book{
-    id:number
+export interface movie{
     name:string
+    rating:string
+    duration:string
+    hidden:boolean
 }
-
-export interface student{
-    id:number,
-    email:string
-}
-
-export interface MarksProps{
-    marks:number[]
-    books:book[]
-    getEmail:(id:number)=>void
-    student:student
-}
-

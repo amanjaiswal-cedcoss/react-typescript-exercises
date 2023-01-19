@@ -1,48 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import "./App.css";
-import Marks from "./components/Marks";
-import Student from "./components/Student";
-import { student } from "./types";
+import { ErrorFallback } from "./components/ErrorFallback";
+import MovieForm from "./components/MovieForm";
+import MovieList from "./components/MovieList";
+import MovieSearch from "./components/MovieSearch";
+import { movie } from "./types";
 
-const books = [
-  { id: 1, name: "Macbeth" },
-  { id: 2, name: "The Tempest" },
-  { id: 3, name: "Harry Porter" },
-  { id: 4, name: "Goosebumps" },
+const defaultMovies = [
+  {
+    name: "Avengers",
+    rating: "95",
+    duration: "2hrs",
+    hidden: false,
+  },
+  {
+    name: "Thor",
+    rating: "90",
+    duration: "2.3hrs",
+    hidden: false,
+  },
+  {
+    name: "AntMan",
+    rating: "87",
+    duration: "2hrs",
+    hidden: false,
+  },
 ];
 
-const students = [
-  { id: 1, email: "aman@gmail.com" },
-  { id: 2, email: "adarsh@gmail.com" },
-  { id: 3, email: "deepanshu@gmail.com" },
-  { id: 4, email: "ritik@gmail.com" },
-];
+interface Context {
+  movies: movie[];
+  setMovies: React.Dispatch<React.SetStateAction<movie[]>> | null;
+  setNotFound: React.Dispatch<React.SetStateAction<boolean>> | null;
+}
+
+export const MoviesContext = createContext<Context>({
+  movies: [],
+  setMovies: null,
+  setNotFound: null,
+});
 
 function App() {
-  const [student, setStudent] = useState<student>({ id: -1, email: "" });
+  const [movies, setMovies] = useState<movie[]>(defaultMovies);
+  const [notFound, setNotFound] = useState<boolean>(false);
 
-  const getEmail = (id: number) => {
-    let temp = students.find((ele) => {
-      return ele.id === id;
-    });
-    if (temp !== undefined) {
-      setStudent(temp);
-    } else if (student.id !== -1) {
-      setStudent({ id: -1, email: "" });
-      alert("No student available with given id");
-    } else {
-      alert("No student available with given id");
-    }
-  };
   return (
-    <div className="App">
-      <Student name="Aman Jaiswal" age={22} qualified={true} gender="male" />
-      <Marks
-        marks={[94, 89, 78, 88, 90]}
-        books={books}
-        getEmail={getEmail}
-        student={student}
-      />
+    <div className="App d-flex align-items-start justify-content-center border border-2 ">
+      <MoviesContext.Provider
+        value={{
+          movies: movies,
+          setMovies: setMovies,
+          setNotFound: setNotFound,
+        }}
+      >
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          resetKeys={[notFound]}
+          onReset={() => {
+            setNotFound(false);
+          }}
+        >
+          <MovieForm />
+          <div className="m-2 App__childs d-flex flex-column align-items-center">
+            <MovieSearch />
+            {notFound ? (
+              <div className="alert alert-warning w-100" role="alert">
+                No movies found!! :(
+              </div>
+            ) : (
+              <MovieList />
+            )}
+          </div>
+        </ErrorBoundary>
+      </MoviesContext.Provider>
     </div>
   );
 }
