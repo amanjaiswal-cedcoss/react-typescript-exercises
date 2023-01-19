@@ -45,35 +45,42 @@ function App() {
   const [notFound, setNotFound] = useState<boolean>(false);
 
   return (
-    <div className="App d-flex align-items-start justify-content-center border border-2 ">
-      <MoviesContext.Provider
-        value={{
-          movies: movies,
-          setMovies: setMovies,
-          setNotFound: setNotFound,
-        }}
-      >
-        <ErrorBoundary
-          FallbackComponent={ErrorFallback}
-          resetKeys={[notFound]}
-          onReset={() => {
-            setNotFound(false);
+    <>
+      <nav className="navbar navbar-light bg-dark bg-gradient ">
+        <div className="container-fluid">
+          <span className="navbar-brand text-light">Favourite Movie Directory</span>
+        </div>
+      </nav>
+      <div className="App d-flex align-items-start justify-content-center border border-2 pt-2">
+        <MoviesContext.Provider
+          value={{
+            movies: movies,
+            setMovies: setMovies,
+            setNotFound: setNotFound,
           }}
         >
-          <MovieForm />
-          <div className="m-2 App__childs d-flex flex-column align-items-center">
-            <MovieSearch />
-            {notFound ? (
-              <div className="alert alert-warning w-100" role="alert">
-                No movies found!! :(
-              </div>
-            ) : (
-              <MovieList />
-            )}
-          </div>
-        </ErrorBoundary>
-      </MoviesContext.Provider>
-    </div>
+          <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            resetKeys={[notFound]}
+            onReset={() => {
+              setNotFound(false);
+            }}
+          >
+            <MovieForm />
+            <div className="m-2 App__childs d-flex flex-column align-items-center">
+              <MovieSearch />
+              {notFound ? (
+                <div className="alert alert-warning w-100" role="alert">
+                  No movies found!! :(
+                </div>
+              ) : (
+                <MovieList />
+              )}
+            </div>
+          </ErrorBoundary>
+        </MoviesContext.Provider>
+      </div>
+    </>
   );
 }
 
