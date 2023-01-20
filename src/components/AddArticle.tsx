@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { addArticle } from "../redux/articlesSlice";
-import { article, store } from "../types";
+import {article,store} from 'typesall'
 
 function AddArticle() {
   const dispatch = useDispatch();

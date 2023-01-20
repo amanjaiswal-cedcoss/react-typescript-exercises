@@ -1,6 +1,6 @@
 import React from "react";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { store } from "../types";
+import { store } from "typesall";
 import {removeArticle} from '../redux/articlesSlice'
 
 function Articles() {
