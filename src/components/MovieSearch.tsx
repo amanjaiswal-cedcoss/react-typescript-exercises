@@ -12,11 +12,11 @@ function MovieSearch() {
       if (refSearch.current.value.length > 1) {
         let search = refSearch.current.value;
          movies.forEach((ele) => {
-          if (ele.name.slice(0,search.length).toLowerCase() !== search.toLowerCase()) {
-            temp.push({...ele,hidden :true})
+          if (ele.name.slice(0,search.length).toLowerCase() === search.toLowerCase()) {
+            temp.push({...ele,hidden :false})
           }
           else{
-            temp.push(ele)
+            temp.push({...ele,hidden :true})
           }
         });
         checkFailedSearch(temp)
@@ -39,10 +39,10 @@ function MovieSearch() {
     let length=temp.filter((ele)=>{return !ele.hidden}).length
         if(length>0){
           setNotFound!==null && setNotFound(false)
-          throw new Error("No movies found!! :(");
         }
         else{
           setNotFound!==null && setNotFound(true)
+          throw new Error("No movies found!! :(");
         }
   }
 

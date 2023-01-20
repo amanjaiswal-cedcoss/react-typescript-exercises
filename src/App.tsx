@@ -15,9 +15,21 @@ const defaultMovies = [
     hidden: false,
   },
   {
+    name: "Average",
+    rating: "75",
+    duration: "2hrs",
+    hidden: false,
+  },
+  {
     name: "Thor",
     rating: "90",
     duration: "2.3hrs",
+    hidden: false,
+  },
+  {
+    name: "The Walking Dead",
+    rating: "90",
+    duration: "2.6hrs",
     hidden: false,
   },
   {
@@ -52,20 +64,8 @@ function App() {
         </div>
       </nav>
       <div className="App d-flex align-items-start justify-content-center border border-2 pt-2">
-        <MoviesContext.Provider
-          value={{
-            movies: movies,
-            setMovies: setMovies,
-            setNotFound: setNotFound,
-          }}
-        >
-          <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            resetKeys={[notFound]}
-            onReset={() => {
-              setNotFound(false);
-            }}
-          >
+        <MoviesContext.Provider value={{   movies: movies,   setMovies: setMovies,   setNotFound: setNotFound, }}>
+          <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[notFound]} onReset={()=>{setNotFound(false)}}>
             <MovieForm />
             <div className="m-2 App__childs d-flex flex-column align-items-center">
               <MovieSearch />
@@ -77,7 +77,7 @@ function App() {
                 <MovieList />
               )}
             </div>
-          </ErrorBoundary>
+          </ErrorBoundary>  
         </MoviesContext.Provider>
       </div>
     </>

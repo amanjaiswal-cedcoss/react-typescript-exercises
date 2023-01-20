@@ -15,7 +15,7 @@ function MovieForm() {
             refErrorAlert.current.hidden=true
             let duration=refDuration.current.value
             if(refDuration.current.value.charAt(refDuration.current.value.length-1)==='m' ){
-              duration=parseInt(refDuration.current.value)/60+'h'
+              duration=(parseInt(refDuration.current.value)/60).toFixed(2)+'h'
             }
             let obj={
               name:refMovieName.current.value,

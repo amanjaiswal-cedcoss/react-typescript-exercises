@@ -8,6 +8,7 @@ interface error {
 }
 
 export function ErrorFallback(props: Iprops) {
+  console.log('error')
   const { error, resetErrorBoundary } = props;
   return (
     <>
