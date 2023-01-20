@@ -15,16 +15,14 @@ function AddProduct(props: IProps) {
   const refTags = useRef<HTMLInputElement>(null);
   const refStock = useRef<HTMLInputElement>(null);
 
+  // useConditions hook is used to get a function for checking default values and inclusion of tags 
   const check=useConditions(props.settings)
 
+    // function to add a product
   const addProduct = (e: React.FormEvent<HTMLFormElement>) => {
-    if (
-      refName.current !== null &&
-      refDescription.current !== null &&
-      refPrice.current !== null &&
-      refTags.current !== null &&
-      refStock.current !== null
-    ) {
+    // checking for null values in current property of refs i.e. required in typescript
+    if ( refName.current !== null && refDescription.current !== null && refPrice.current !== null && refTags.current !== null && refStock.current !== null) {
+      // creating an array of all tags
       let tags = refTags.current.value.split(",");
       let obj={
         name:refName.current.value,
@@ -33,8 +31,8 @@ function AddProduct(props: IProps) {
         tags:tags,
         zipcode:0
       }
+        // using check function get finalObj
       let finalObj=check(obj)
-      console.log(finalObj)
       let temp = props.products;
       if (finalObj !== undefined && finalObj.name!==undefined && finalObj.stock!==undefined && finalObj.price!==undefined) {
         let obj = {

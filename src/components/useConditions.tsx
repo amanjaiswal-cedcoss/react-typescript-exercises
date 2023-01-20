@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+
 import { hookObj, settings } from '../types'
 
 function useConditions(settings:settings) {
-  // const [finalObj,setFinalObj]=useState<hookObj>(obj)
 
+  //function to check for required conditions as per task and return an object
   const check=(obj:hookObj)=>{
     const finalObj=obj;
     if(obj!==null){
-       console.log(obj)
       if(settings.titleIncludesTags===true && obj.tags!==undefined){
         finalObj.name=`${obj.name} ${obj.tags.join(',')}`
       }else{

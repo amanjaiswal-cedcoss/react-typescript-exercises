@@ -15,26 +15,26 @@ function AddOrder(props:IProps) {
   const refZipcode=useRef<HTMLInputElement>(null)
   const refProducts=useRef<HTMLSelectElement>(null)
   const refQuantity=useRef<HTMLInputElement>(null)
-
+  
+  // useConditions hook is used to get a function for checking default values 
   const check = useConditions(props.settings);
 
+  // function to add an order
   const addOrder=(e:React.FormEvent<HTMLFormElement>)=>{
+    // checking for null values in current property of refs i.e. required in typescript
     if(refCustName.current!==null && refCustAddress.current!==null && refZipcode.current!==null && refProducts.current!==null && refQuantity.current!==null){
       let tempArr:product[]=[]
+      // creating array of all selected products
       Array.from(refProducts.current.selectedOptions).forEach(ele=>{
         tempArr.push(props.products[Number(ele.value)])
       })
+      // return condition if no products are selected
       if(tempArr.length===0){
         alert('select atleast one product')
         return
       }
-      let obj={
-        name:'',
-        price:'',
-        stock:0,
-        tags:[],
-        zipcode:Number(refZipcode.current.value)
-      }
+      let obj={ name:'', price:'', stock:0, tags:[], zipcode:Number(refZipcode.current.value)}
+      // using check function get finalObj
       let finalObj=check(obj)
       if(finalObj?.zipcode!==undefined){
         let order={
