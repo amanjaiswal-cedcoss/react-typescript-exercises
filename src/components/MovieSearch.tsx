@@ -6,11 +6,15 @@ function MovieSearch() {
   const refSearch = useRef<HTMLInputElement>(null);
   const { movies, setMovies,setNotFound } = useContext(MoviesContext);
 
+  // onchange handler function for filtering matched movies
   const searchMovie = () => {
+    // checking for null value of ref's current property
     if (refSearch.current !== null) {
       let temp:movie[]=[]
+      // condition to make sure more than 1 character is entered in search input
       if (refSearch.current.value.length > 1) {
         let search = refSearch.current.value;
+        // traversing the original array and changing hidden property values to show only matching movies
          movies.forEach((ele) => {
           if (ele.name.slice(0,search.length).toLowerCase() === search.toLowerCase()) {
             temp.push({...ele,hidden :false})
@@ -20,21 +24,26 @@ function MovieSearch() {
           }
         });
         checkFailedSearch(temp)
-        if(setMovies!==null && temp!==undefined)
-        setMovies([...temp])
+        //typescript requires checking of null before use 
+        if(setMovies!==null && temp!==undefined){
+          setMovies([...temp])
+        }
       }
       else{
         temp=movies.map(ele=>{
           return {...ele,hidden:false}
         })
         checkFailedSearch(temp)
-        if(setMovies!==null)
+          //typescript requires checking of null before use 
+        if(setMovies!==null){
         setMovies([...temp])
+        }
 
       }
     }
   };
 
+  // function to check for failed search depending on length of array
   const checkFailedSearch=(temp:movie[])=>{
     let length=temp.filter((ele)=>{return !ele.hidden}).length
         if(length>0){

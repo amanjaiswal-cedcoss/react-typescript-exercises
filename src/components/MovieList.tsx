@@ -4,6 +4,7 @@ import { MoviesContext } from "../App";
 function MovieList() {
   const {movies} = useContext(MoviesContext);
 
+  // sorting movies before rendering
   const sortedMovies=useMemo(()=>{
     let temp=movies.sort((a,b)=>{
       return parseFloat(b.duration)-parseFloat(a.duration)

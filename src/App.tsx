@@ -7,6 +7,7 @@ import MovieList from "./components/MovieList";
 import MovieSearch from "./components/MovieSearch";
 import { movie } from "./types";
 
+// default movies added to be rendered initially 
 const defaultMovies = [
   {
     name: "Avengers",
@@ -46,6 +47,7 @@ interface Context {
   setNotFound: React.Dispatch<React.SetStateAction<boolean>> | null;
 }
 
+//context created which will handle a State for movies and a SetStateAction
 export const MoviesContext = createContext<Context>({
   movies: [],
   setMovies: null,
@@ -69,6 +71,7 @@ function App() {
             <MovieForm />
             <div className="m-2 App__childs d-flex flex-column align-items-center">
               <MovieSearch />
+              {/* conditional rendering for failed search */}
               {notFound ? (
                 <div className="alert alert-warning w-100" role="alert">
                   No movies found!! :(

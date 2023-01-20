@@ -5,16 +5,21 @@ function MovieForm() {
     const refMovieName=useRef<HTMLInputElement>(null)
     const refRating=useRef<HTMLInputElement>(null)
     const refDuration=useRef<HTMLInputElement>(null)
+    // ref for div conatining error message of invalid duration being submitted
     const refErrorAlert=useRef<HTMLDivElement>(null)
 
     const {movies,setMovies} = useContext(MoviesContext);
 
     const addMovie=(e:React.FormEvent<HTMLFormElement>)=>{
+      // checking for any null values of all ref's current property
         if(refMovieName.current!==null &&refRating.current!==null &&refDuration.current!==null && refErrorAlert.current!==null){
+          
+          // condition to check inclusion of 'm' or 'h' at end of duration value 
           if(refDuration.current.value.charAt(refDuration.current.value.length-1)==='m' || refDuration.current.value.charAt(refDuration.current.value.length-1)==='h'){
             refErrorAlert.current.hidden=true
             let duration=refDuration.current.value
             if(refDuration.current.value.charAt(refDuration.current.value.length-1)==='m' ){
+              // converting duration from minutes to hours
               duration=(parseInt(refDuration.current.value)/60).toFixed(2)+'h'
             }
             let obj={
