@@ -26,10 +26,10 @@ function AddArticle() {
   return (
     <form className="card shadow p-4 border-0 my-4 rounded-4" onSubmit={(e)=>{addArticleHandler(e)}}>
       <div className="mb-3">
-        <input placeholder="Enter Title" required ref={refTitle}  type="email"  className="form-control rounded-4 border-info border-2"  id="exampleInputEmail1" />
+        <input placeholder="Enter Title" required ref={refTitle}  type="text"  className="form-control rounded-4 border-info border-2"/>
       </div>
       <div className="mb-3">
-        <input placeholder="Enter Description" required ref={refDesc}  type="password"  className="form-control rounded-4 border-info border-2"  id="exampleInputPassword1"/>
+        <input placeholder="Enter Description" required ref={refDesc}  type="text"  className="form-control rounded-4 border-info border-2"/>
       </div>
       <button type="submit" className="btn btn-info rounded-pill w-100 text-white py-2">
         Add Article

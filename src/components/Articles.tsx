@@ -11,7 +11,7 @@ function Articles() {
     <>
       {articles.map((ele,i) => {
         return (
-          <div className='card shadow p-4 border-0 my-4 rounded-4 flex-row align-items-center'>
+          <div className='card shadow p-4 border-0 my-4 rounded-4 flex-row align-items-center justify-content-between'>
             <span className="text-start">
               <h3>{ele.title}</h3>
               <p>{ele.body}</p>
