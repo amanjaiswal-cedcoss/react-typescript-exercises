@@ -19,7 +19,7 @@ function ListSettings(props:IProps) {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">{props.settings.titleIncludesTags?'Yes':'No'}</th>
+            <th scope="row">{props.settings.titleIncludesTags?'No':'Yes'}</th>
             <td className="shorttxt">{props.settings.defaultPrice}</td>
             <td>{props.settings.defaultStock}</td>
             <td className="shorttxt">{props.settings.defaultZipcode}</td>

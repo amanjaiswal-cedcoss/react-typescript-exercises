@@ -32,8 +32,8 @@ function App() {
   const [orders, setOrders] = useState<order[]>(initialOrders);
   const [settings, setSettings] = useState<settings>({ titleIncludesTags: true, defaultPrice: '₹10,000', defaultStock: 0, defaultZipcode: 111111,});
 
-  console.log('products-',products)
-  console.log('settings-',settings);
+  // console.log('products-',products)
+  // console.log('settings-',settings);
   
 
   return (

@@ -46,9 +46,9 @@ export interface settings{
 }
 
 export interface hookObj{
-    name:string
-    tags:string[]
-    price:string
-    stock :number
-    zipcode:number
+    name?:string
+    tags?:string[]
+    price?:string
+    stock? :number
+    zipcode?:number
 }

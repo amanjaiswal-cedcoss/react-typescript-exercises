@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { hookObj, order, product, settings } from '../types'
+import { order, product, settings } from '../types'
 import useConditions from './useConditions'
 interface IProps{
   products:product[]
@@ -9,7 +9,6 @@ interface IProps{
 }
 
 function AddOrder(props:IProps) {
-  const product = useRef<hookObj>({ name: "", price: "", tags: [], stock: 0, zipcode: 0});
 
   const refCustName=useRef<HTMLInputElement>(null)
   const refCustAddress=useRef<HTMLTextAreaElement>(null)
@@ -17,7 +16,7 @@ function AddOrder(props:IProps) {
   const refProducts=useRef<HTMLSelectElement>(null)
   const refQuantity=useRef<HTMLInputElement>(null)
 
-  const finalObj = useConditions(props.settings, product.current);
+  const check = useConditions(props.settings);
 
   const addOrder=(e:React.FormEvent<HTMLFormElement>)=>{
     if(refCustName.current!==null && refCustAddress.current!==null && refZipcode.current!==null && refProducts.current!==null && refQuantity.current!==null){
@@ -25,34 +24,46 @@ function AddOrder(props:IProps) {
       Array.from(refProducts.current.selectedOptions).forEach(ele=>{
         tempArr.push(props.products[Number(ele.value)])
       })
-      product.current.zipcode=Number(refZipcode.current.value);
-      if(finalObj!==undefined){
-        let obj={
+      if(tempArr.length===0){
+        alert('select atleast one product')
+        return
+      }
+      let obj={
+        name:'',
+        price:'',
+        stock:0,
+        tags:[],
+        zipcode:Number(refZipcode.current.value)
+      }
+      let finalObj=check(obj)
+      if(finalObj?.zipcode!==undefined){
+        let order={
           customerName:refCustName.current.value,
           customerAddress:refCustAddress.current.value,
           zipcode:finalObj.zipcode,
           products:tempArr,
           quantity:Number(refQuantity.current.value),
         }
-        let temp=props.orders
-        temp.push(obj)
-        props.setOrders([...temp])
-        e.currentTarget.reset()
+          let temp=props.orders
+          temp.push(order)
+          props.setOrders([...temp])
+          e.currentTarget.reset()
+      }
       }
      
     }
-  }
+  
 
   return (
     <form className="border border-dark m-2 card p-4 d-inline-flex card shadow-sm border-0"  onSubmit={(e)=>{e.preventDefault();addOrder(e)}}>
       <h4>Add Order</h4>
       <div className="mb-3">
         <label className="form-label">Customer Name</label>
-        <input ref={refCustName} type="text" className="form-control" id="customername"/> 
+        <input required ref={refCustName} type="text" className="form-control" id="customername"/> 
       </div>
       <div className="mb-3">
         <label className="form-label">Customer Address</label>
-        <textarea ref={refCustAddress} className="form-control" id="customeraddress"/> 
+        <textarea required  ref={refCustAddress} className="form-control" id="customeraddress"/> 
       </div>
       <div className="mb-3">
         <label className="form-label">Zipcode</label>

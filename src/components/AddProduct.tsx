@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { hookObj, product, settings } from "../types";
+import { product, settings } from "../types";
 import useConditions from "./useConditions";
 interface IProps {
   products: product[];
@@ -8,7 +8,6 @@ interface IProps {
 }
 
 function AddProduct(props: IProps) {
-  const product = useRef<hookObj>({ name: "", price: "", tags: [], stock: 0, zipcode: 0});
 
   const refName = useRef<HTMLInputElement>(null);
   const refDescription = useRef<HTMLTextAreaElement>(null);
@@ -16,7 +15,7 @@ function AddProduct(props: IProps) {
   const refTags = useRef<HTMLInputElement>(null);
   const refStock = useRef<HTMLInputElement>(null);
 
-  const finalObj = useConditions(props.settings, product.current);
+  const check=useConditions(props.settings)
 
   const addProduct = (e: React.FormEvent<HTMLFormElement>) => {
     if (
@@ -27,11 +26,17 @@ function AddProduct(props: IProps) {
       refStock.current !== null
     ) {
       let tags = refTags.current.value.split(",");
-      product.current.name = refName.current.value;
-      product.current.price = refPrice.current.value;
-      product.current.stock = Number(refStock.current.value);
+      let obj={
+        name:refName.current.value,
+        price:refPrice.current.value,
+        stock:parseInt(refStock.current.value),
+        tags:tags,
+        zipcode:0
+      }
+      let finalObj=check(obj)
+      console.log(finalObj)
       let temp = props.products;
-      if (finalObj !== undefined) {
+      if (finalObj !== undefined && finalObj.name!==undefined && finalObj.stock!==undefined && finalObj.price!==undefined) {
         let obj = {
           name: finalObj.name,
           description: refDescription.current.value,
@@ -98,6 +103,9 @@ function AddProduct(props: IProps) {
         <input
           ref={refStock}
           type="number"
+          min={1}
+          minLength={1}
+          defaultValue={1}
           className="form-control"
           id="stock"
         />
